@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entornos Virtuales y Negocios Digitales</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        
+        /* Navegación */
+        nav {
+            position: fixed;
+            width: 100%;
+            background: rgba(37, 99, 235, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            padding: 0 2rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #3b82f6;
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: #dbeafe;
+        }
+
+        .hero {
+            height: 100vh;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 60px;
+            position: relative;
+        }
+
+        .video-fullscreen {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .video-fullscreen iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 3rem 2rem;
+            color: white;
+            text-align: center;
+        }
+
+        .video-overlay h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .video-overlay p {
+            font-size: 1.3rem;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+        }
+
+        /* Secciones */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1e293b;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: #2563eb;
+            border-radius: 2px;
+        }
+
+        /* Asignaturas Principales */
+        #asignaturas {
+            background: #2563eb;
+            color: white;
+        }
+
+        #asignaturas .section-title {
+            color: white;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .subject-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .subject-card:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .subject-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .subject-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subject-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Portafolio */
+        #portafolio {
+            background: #f8fafc;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .portfolio-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 220px;
+            background: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+        }
+
+        .portfolio-content {
+            padding: 1.5rem;
+        }
+
+        .portfolio-content h3 {
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-content p {
+            color: #64748b;
+        }
+
+        /* Eventos */
+        #eventos {
+            background: white;
+        }
+
+        .events-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .event-card {
+            background: #2563eb;
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .event-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.3);
+        }
+
+        .event-date {
+            background: rgba(255,255,255,0.2);
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .event-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .event-card p {
+            line-height: 1.8;
+        }
+
+        .event-type {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: rgba(255,255,255,0.3);
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        /* Mapas Curriculares con Imagen */
+        #mapas-curriculares {
+            background: #f8fafc;
+        }
+
+        .curriculum-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: white;
+            border: 2px solid #2563eb;
+            color: #2563eb;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            background: #2563eb;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .curriculum-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .curriculum-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .curriculum-image-container {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .curriculum-preview {
+            width: 100%;
+            height: 600px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            border: 2px dashed #cbd5e1;
+        }
+
+        .download-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4);
+            background: #1d4ed8;
+        }
+
+        /* Directorio de Maestros */
+        #maestros {
+            background: white;
+        }
+
+        .teachers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .teacher-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .teacher-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .teacher-photo {
+            width: 100%;
+            height: 250px;
+            background: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+        }
+
+        .teacher-info {
+            padding: 1.5rem;
+        }
+
+        .teacher-info h3 {
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .teacher-specialty {
+            color: #2563eb;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .teacher-info p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Empresas */
+        #empresas {
+            background: white;
+            color: #1e293b;
+        }
+
+        #empresas .section-title {
+            color: #1e293b;
+        }
+
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .company-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .company-card:hover {
+            border-color: #2563eb;
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
+        }
+
+        .company-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .company-card h3 {
+            color: #1e293b;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e3a8a;
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo-section {
+            text-align: center;
+        }
+
+        .footer-logo {
+            width: 150px;
+            height: 150px;
+            background: #2563eb;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin: 0 auto 1rem;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+
+        .footer-logo-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-logo-section p {
+            color: #94a3b8;
+        }
+
+        .footer-form {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-form h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: white;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            background: rgba(255,255,255,0.15);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .submit-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.4);
+            background: #1d4ed8;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #94a3b8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .video-overlay h1 {
+                font-size: 2rem;
+            }
+
+            .video-overlay p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .curriculum-preview {
+                height: 400px;
+            }
+
+            nav ul {
+                gap: 0.8rem;
+            }
+
+            nav a {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#asignaturas">Asignaturas</a></li>
+            <li><a href="#portafolio">Proyectos</a></li>
+            <li><a href="#eventos">Eventos</a></li>
+            <li><a href="#mapas-curriculares">Mapas Curriculares</a></li>
+            <li><a href="#maestros">Maestros</a></li>
+            <li><a href="#empresas">Empresas</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section - Video Fullscreen -->
+    <section id="inicio" class="hero">
+        <div class="video-fullscreen">
+            <!-- Reemplaza el src con tu video de YouTube -->
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="video-overlay">
+                <h1>Carrera de TICs</h1>
+                <p>Transforma tu pasión por la tecnología en una carrera exitosa</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Asignaturas Principales -->
+    <section id="asignaturas">
+        <h2 class="section-title">Asignaturas Principales</h2>
+        <div class="subjects-grid">
+            <div class="subject-card">
+                <div class="subject-icon">💻</div>
+                <h3>Programación</h3>
+                <p>Domina lenguajes modernos como Python, Java, JavaScript y frameworks actuales</p>
+            </div>
+            <div class="subject-card">
+                <div class="subject-icon">🗄️</div>
+                <h3>Bases de Datos</h3>
+                <p>Administración y diseño de bases de datos SQL y NoSQL para aplicaciones empresariales</p>
+            </div>
+            <div class="subject-card">
+                <div class="subject-icon">🌐</div>
+                <h3>Desarrollo Web</h3>
+                <p>Creación de aplicaciones web modernas con React, Angular y tecnologías backend</p>
+            </div>
+            <div class="subject-card">
+                <div class="subject-icon">🔒</div>
+                <h3>Ciberseguridad</h3>
+                <p>Protección de sistemas, ethical hacking y gestión de vulnerabilidades</p>
+            </div>
+            <div class="subject-card">
+                <div class="subject-icon">☁️</div>
+                <h3>Cloud Computing</h3>
+                <p>Implementación de soluciones en AWS, Azure y Google Cloud Platform</p>
+            </div>
+            <div class="subject-card">
+                <div class="subject-icon">🤖</div>
+                <h3>Inteligencia Artificial</h3>
+                <p>Machine Learning, Deep Learning y análisis de datos con Python</p>
+            </div>
+            <div class="subject-card">
+                <div class="subject-icon">📱</div>
+                <h3>Desarrollo Móvil</h3>
+                <p>Apps nativas e híbridas para iOS y Android con Flutter y React Native</p>
+            </div>
+            <div class="subject-card">
+                <div class="subject-icon">🔧</div>
+                <h3>DevOps</h3>
+                <p>Automatización, CI/CD, Docker, Kubernetes y metodologías ágiles</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portafolio -->
+    <section id="portafolio">
+        <h2 class="section-title">Proyectos Destacados</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <div class="portfolio-image">💻</div>
+                <div class="portfolio-content">
+                    <h3>Sistema de Gestión Empresarial</h3>
+                    <p>Plataforma web completa con módulos de inventario, ventas y reportes en tiempo real.</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-image">📱</div>
+                <div class="portfolio-content">
+                    <h3>App de Telemedicina</h3>
+                    <p>Aplicación móvil ganadora del premio nacional que conecta pacientes con doctores.</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-image">🤖</div>
+                <div class="portfolio-content">
+                    <h3>Sistema de Recomendación IA</h3>
+                    <p>Algoritmo de machine learning para personalizar experiencias de usuario.</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-image">🔒</div>
+                <div class="portfolio-content">
+                    <h3>Plataforma de Ciberseguridad</h3>
+                    <p>Herramienta de análisis de vulnerabilidades para empresas medianas.</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-image">☁️</div>
+                <div class="portfolio-content">
+                    <h3>Infraestructura Cloud Escalable</h3>
+                    <p>Arquitectura serverless en AWS que maneja 100k+ usuarios concurrentes.</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-image">🎮</div>
+                <div class="portfolio-content">
+                    <h3>Videojuego Educativo 3D</h3>
+                    <p>Juego interactivo desarrollado en Unity para enseñar programación a niños.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Eventos y Noticias -->
+    <section id="eventos">
+        <h2 class="section-title">Próximos Eventos y Noticias</h2>
+        <div class="events-container">
+            <div class="event-card">
+                <span class="event-date">📅 15 de Diciembre, 2024</span>
+                <h3>Hackathon TICs 2024</h3>
+                <p>Competencia de 48 horas donde equipos de estudiantes desarrollarán soluciones innovadoras. Premios de hasta $50,000 MXN.</p>
+                <span class="event-type">🏆 Competencia</span>
+            </div>
+            <div class="event-card">
+                <span class="event-date">📅 20 de Diciembre, 2024</span>
+                <h3>Conferencia: IA en la Industria</h3>
+                <p>Expertos de Google y Microsoft compartirán las últimas tendencias en Inteligencia Artificial.</p>
+                <span class="event-type">🎤 Conferencia</span>
+            </div>
+            <div class="event-card">
+                <span class="event-date">📰 Noviembre 2024</span>
+                <h3>Premio Nacional de Apps</h3>
+                <p>Nuestro equipo obtuvo primer lugar en competencia nacional con proyecto de telemedicina.</p>
+                <span class="event-type">🏅 Logro</span>
+            </div>
+            <div class="event-card">
+                <span class="event-date">📅 10 de Enero, 2025</span>
+                <h3>Feria de Empresas Tech</h3>
+                <p>Más de 30 empresas visitarán el campus para reclutar talento. ¡No faltes!</p>
+                <span class="event-type">💼 Networking</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mapas Curriculares -->
+    <section id="mapas-curriculares">
+        <h2 class="section-title">Mapas Curriculares</h2>
+        
+        <div class="curriculum-tabs">
+            <button class="tab-btn active" onclick="showCurriculum('tsu')">
+                📚 TSU en TICs
+            </button>
+            <button class="tab-btn" onclick="showCurriculum('ingenieria')">
+                🎓 Ingeniería en TICs
+            </button>
+        </div>
+
+        <div id="tsu-content" class="curriculum-content active">
+            <div class="curriculum-image-container">
+                <div class="curriculum-preview">
+                    📄
+                    <div style="position: absolute; bottom: 2rem; font-size: 1rem; color: #64748b;">
+                        Mapa Curricular TSU
+                    </div>
+                </div>
+                <button class="download-btn" onclick="downloadPDF('tsu')">
+                    📥 Descargar PDF - Mapa TSU
+                </button>
+            </div>
+        </div>
+
+        <div id="ingenieria-content" class="curriculum-content">
+            <div class="curriculum-image-container">
+                <div class="curriculum-preview">
+                    📄
+                    <div style="position: absolute; bottom: 2rem; font-size: 1rem; color: #64748b;">
+                        Mapa Curricular Ingeniería
+                    </div>
+                </div>
+                <button class="download-btn" onclick="downloadPDF('ingenieria')">
+                    📥 Descargar PDF - Mapa Ingeniería
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Directorio de Maestros -->
+    <section id="maestros">
+        <h2 class="section-title">Nuestros Maestros</h2>
+        <div class="teachers-grid">
+            <div class="teacher-card">
+                <div class="teacher-photo">👨‍🏫</div>
+                <div class="teacher-info">
+                    <h3>Dr. Juan Pérez García</h3>
+                    <p class="teacher-specialty">Inteligencia Artificial</p>
+                    <p>15 años en Machine Learning y Deep Learning. Doctorado en Ciencias Computacionales.</p>
+                </div>
+            </div>
+            <div class="teacher-card">
+                <div class="teacher-photo">👩‍🏫</div>
+                <div class="teacher-info">
+                    <h3>Mtra. María López Sánchez</h3>
+                    <p class="teacher-specialty">Desarrollo Web</p>
+                    <p>Experta en tecnologías frontend y backend. Certificada en React y Node.js.</p>
+                </div>
+            </div>
+            <div class="teacher-card">
+                <div class="teacher-photo">👨‍💼</div>
+                <div class="teacher-info">
+                    <h3>Ing. Carlos Ramírez Torres</h3>
+                    <p class="teacher-specialty">Ciberseguridad</p>
+                    <p>Especialista en ethical hacking. Certificaciones CEH y CISSP.</p>
+                </div>
+            </div>
+            <div class="teacher-card">
+                <div class="teacher-photo">👩‍💻</div>
+                <div class="teacher-info">
+                    <h3>Dra. Ana Martínez Cruz</h3>
+                    <p class="teacher-specialty">Base de Datos</p>
+                    <p>Experta en Big Data. Certificada en Oracle y MongoDB.</p>
+                </div>
+            </div>
+            <div class="teacher-card">
+                <div class="teacher-photo">👨‍🔧</div>
+                <div class="teacher-info">
+                    <h3>Mtro. Roberto Díaz Luna</h3>
+                    <p class="teacher-specialty">Redes y Cloud</p>
+                    <p>Arquitecto cloud en AWS y Azure. 12 años en infraestructura.</p>
+                </div>
+            </div>
+            <div class="teacher-card">
+                <div class="teacher-photo">👩‍🎨</div>
+                <div class="teacher-info">
+                    <h3>Mtra. Laura González Ríos</h3>
+                    <p class="teacher-specialty">UX/UI Design</p>
+                    <p>Diseñadora de experiencias digitales centradas en el usuario.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Empresas -->
+    <section id="empresas">
+        <h2 class="section-title">Empresas que Confían en Nuestros Egresados</h2>
+        <div class="companies-grid">
+            <div class="company-card">
+                <div class="company-icon">🏢</div>
+                <h3>TechCorp</h3>
+            </div>
+            <div class="company-card">
+                <div class="company-icon">💼</div>
+                <h3>Innovasoft</h3>
+            </div>
+            <div class="company-card">
+                <div class="company-icon">🚀</div>
+                <h3>Digital Solutions</h3>
+            </div>
+            <div class="company-card">
+                <div class="company-icon">⚡</div>
+                <h3>CloudTech</h3>
+            </div>
+            <div class="company-card">
+                <div class="company-icon">🌐</div>
+                <h3>WebMasters</h3>
+            </div>
+            <div class="company-card">
+                <div class="company-icon">🔧</div>
+                <h3>SysAdmin Pro</h3>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo-section">
+                <div class="footer-logo">🎓</div>
+                <h3>Carrera de TICs</h3>
+                <p>Formando profesionales de tecnología desde 2010</p>
+                <p style="margin-top: 1rem; color: #64748b;">
+                    Campus Universitario<br>
+                    Ciudad Juárez, Chihuahua<br>
+                    Tel: (656) 123-4567
+                </p>
+            </div>
+
+            <div class="footer-form">
+                <h3>¿Te interesa la carrera?</h3>
+                <form id="interestForm">
+                    <div class="form-group">
+                        <label for="nombre">Nombre completo *</label>
+                        <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo electrónico *</label>
+                        <input type="email" id="email" name="email" required placeholder="tu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono" placeholder="(656) 123-4567">
+                    </div>
+                    <div class="form-group">
+                        <label for="nivel">Nivel de interés *</label>
+                        <select id="nivel" name="nivel" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="tsu">TSU en TICs</option>
+                            <option value="ingenieria">Ingeniería en TICs</option>
+                            <option value="ambos">Ambos programas</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje o preguntas</label>
+                        <textarea id="mensaje" name="mensaje" placeholder="¿Qué te gustaría saber?"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Enviar mi interés ✉️</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Carrera de TICs. Construyendo el futuro de la tecnología.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault(); // Evitar el comportamiento por defecto por ejemplo: recargar la página o navegar abruptamente.
+                const target = document.querySelector(this.getAttribute('href')); // Obtener el elemento objetivo basado en el href del enlace.
+                if (target) { // Validamos si hay un elemento objetivo.
+                    target.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Tabs de curriculum
+        function showCurriculum(type) {
+            // Ocultar todos los contenidos
+            document.querySelectorAll('.curriculum-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remover active de todos los botones
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Mostrar el contenido seleccionado
+            document.getElementById(type + '-content').classList.add('active');
+            
+            // Activar el botón correspondiente
+            event.target.classList.add('active');
+        }
+
+        // Función de descarga de PDF
+        function downloadPDF(type) {
+            // Aquí puedes poner la ruta real de tus PDFs
+            const pdfUrls = {
+                'tsu': 'ruta/al/mapa-curricular-tsu.pdf',
+                'ingenieria': 'ruta/al/mapa-curricular-ingenieria.pdf'
+            };
+            
+            alert(`Descargando Mapa Curricular de ${type.toUpperCase()}...\n\nNota: Configura la ruta del PDF en el código JavaScript.`);
+            
+            // Cuando tengas los PDFs reales, usa esto:
+            // window.open(pdfUrls[type], '_blank');
+        }
+
+        // Animación al hacer scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.portfolio-item, .teacher-card, .company-card, .subject-card, .event-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Manejo del formulario
+        document.getElementById('interestForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                nombre: document.getElementById('nombre').value,
+                email: document.getElementById('email').value,
+                telefono: document.getElementById('telefono').value,
+                nivel: document.getElementById('nivel').value,
+                mensaje: document.getElementById('mensaje').value
+            };
+            
+            console.log('Datos del formulario:', formData);
+            
+            alert('¡Gracias por tu interés! Nos pondremos en contacto contigo pronto.');
+            
+            this.reset();
+        });
+    </script>
+</body>
+</html>
